@@ -12,7 +12,17 @@ const middleWareSaga = createSagaMiddleware();
 
 function* rootSaga() {
   yield takeEvery("GET_FAVORITES", getFavorites);
+  yield takeEvery("GET_CATEGORIES", getCategories);
   yield takeEvery("SEARCH_GIF", searchGifSaga);
+}
+
+function* getCategories(action) {
+  try {
+    const results = yield axios.get("/api/category");
+    yield put({ type: "SET_CATEGORIES", payload: results.data });
+  } catch (error) {
+    console.log("error caught in error :>> ", error);
+  }
 }
 
 function* getFavorites(action) {
@@ -52,10 +62,18 @@ function favoritesReducer(state = [], action) {
   return state;
 }
 
+function categoryReducer(state = [], action) {
+  if (action.type === "SET_CATEGORIES") {
+    return action.payload;
+  }
+  return state;
+}
+
 const storeInstance = createStore(
   combineReducers({
     gifReducer,
     favorites: favoritesReducer,
+    categories: categoryReducer,
   }),
   applyMiddleware(logger, middleWareSaga)
 );
