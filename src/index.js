@@ -11,12 +11,12 @@ import axios from "axios";
 const middleWareSaga = createSagaMiddleware();
 
 function* rootSaga() {
-  takeEvery("GET_FAVORITES", getFavorites);
+  yield takeEvery("GET_FAVORITES", getFavorites);
 }
 
 function* getFavorites(action) {
-  const results = axios.get("/api/favorite");
-  put({ type: "SET_FAVORITES", payload: results.data });
+  const results = yield axios.get("/api/favorite");
+  yield put({ type: "SET_FAVORITES", payload: results.data });
 }
 
 function gifReducer(state = [], action) {

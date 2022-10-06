@@ -1,10 +1,8 @@
 import { useSelector } from "react-redux";
+import FavImageList from "../../FavImageList/FavImageList";
 
 function Favorites() {
-
-  
-
-  return <h2>Favorites</h2>;
+  return <FavImageList />;
 }
 
 export default Favorites;
