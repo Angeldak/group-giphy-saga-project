@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import FavImageList from "../../FavImageList/FavImageList";
 
 function Favorites() {
