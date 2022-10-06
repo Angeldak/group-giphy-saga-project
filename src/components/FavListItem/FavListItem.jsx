@@ -1,4 +1,5 @@
 import { useState } from "react";
+import CategoryList from "./CategoryList/CategoryList";
 
 function FavListItem({ item }) {
   const [toggleCategories, setToggleCategories] = useState(false);
@@ -16,7 +17,7 @@ function FavListItem({ item }) {
         <button onClick={() => clickHandler()}>
           {toggleCategories ? "Save" : "Categories"}
         </button>
-        {toggleCategories && "This Category"}
+        {toggleCategories && <CategoryList />}
       </div>
     </div>
   );
