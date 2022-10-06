@@ -1,4 +1,4 @@
-function ImageListItem({ item }) {
+function FavListItem({ item }) {
   return (
     <div className="card">
       <div className="gif">
@@ -11,4 +11,7 @@ function ImageListItem({ item }) {
   );
 }
 
-export default ImageListItem;
+export default FavListItem;
+{
+  item;
+}
