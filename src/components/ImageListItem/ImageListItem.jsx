@@ -1,5 +1,14 @@
-function ImageListItem() {
-  return <h2>Image List Item</h2>;
+function ImageListItem({ item }) {
+  return (
+    <div className="card">
+      <div className="gif">
+        <img src="#" />
+      </div>
+      <div className="button">
+        <button>Favorite</button>
+      </div>
+    </div>
+  );
 }
 
 export default ImageListItem;
