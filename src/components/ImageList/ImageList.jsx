@@ -3,7 +3,9 @@ import ImageListItem from "../ImageListItem/ImageListItem";
 function ImageList({ list }) {
   return (
     <div className="container">
-      <ImageListItem />
+      {list.map((item, index) => (
+        <li key={index}>Item</li>
+      ))}
     </div>
   );
 }
