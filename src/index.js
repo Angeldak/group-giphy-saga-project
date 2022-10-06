@@ -11,7 +11,13 @@ import axios from "axios";
 const middleWareSaga = createSagaMiddleware();
 
 function* rootSaga() {
+  yield takeEvery("GET_FAVORITES", getFavorites);
   yield takeEvery('SEARCH_GIF', searchGifSaga);
+}
+
+function* getFavorites(action) {
+  const results = yield axios.get("/api/favorite");
+  yield put({ type: "SET_FAVORITES", payload: results.data });
 }
 
 function* searchGifSaga(action) {
@@ -35,9 +41,17 @@ function gifReducer(state = [], action) {
   return state;
 }
 
+function favoritesReducer(state = [], action) {
+  if (action.type === "SET_FAVORITES") {
+    return action.payload;
+  }
+  return state;
+}
+
 const storeInstance = createStore(
   combineReducers({
     gifReducer,
+    favorites: favoritesReducer,
   }),
   applyMiddleware(logger, middleWareSaga)
 );
