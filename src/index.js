@@ -10,9 +10,28 @@ import axios from "axios";
 
 const middleWareSaga = createSagaMiddleware();
 
-function* rootSaga() {}
+function* rootSaga() {
+  yield takeEvery('SEARCH_GIF', searchGifSaga);
+}
+
+function* searchGifSaga(action) {
+  try {
+    console.log('This is action in searchGif: ', action);
+    const response = yield axios.get(`/api/search/${action.payload}`);
+    yield put({
+      type: 'SET_SEARCH_RESULTS',
+      payload: response.data
+    })
+    console.log('this is response in set search results: ', response);
+  } catch(err) {
+  console.log('Error in catch: ', err); 
+  }
+}
 
 function gifReducer(state = [], action) {
+  if (action.type === 'SET_SEARCH_RESULTS') {
+    return action.payload;
+  }
   return state;
 }
 
