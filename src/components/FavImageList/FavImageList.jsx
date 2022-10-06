@@ -4,7 +4,7 @@ function FavImageList() {
   return (
     <div className="container">
       {/* Need to map */}
-      <FavListItem />
+      <FavListItem item={item} />
     </div>
   );
 }

@@ -10,15 +10,30 @@ import axios from "axios";
 
 const middleWareSaga = createSagaMiddleware();
 
-function* rootSaga() {}
+function* rootSaga() {
+  takeEvery("GET_FAVORITES", getFavorites);
+}
+
+function* getFavorites(action) {
+  const results = axios.get("/api/favorite");
+  put({ type: "SET_FAVORITES", payload: results.data });
+}
 
 function gifReducer(state = [], action) {
+  return state;
+}
+
+function favoritesReducer(state = [], action) {
+  if (action.type === "SET_FAVORITES") {
+    return action.payload;
+  }
   return state;
 }
 
 const storeInstance = createStore(
   combineReducers({
     gifReducer,
+    favorites: favoritesReducer,
   }),
   applyMiddleware(logger, middleWareSaga)
 );
