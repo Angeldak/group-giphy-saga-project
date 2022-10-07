@@ -31,6 +31,7 @@ function Categories() {
         ))}
       </div>
       <div className="categories-buttons">
+        <p>How would you like to modify the categories?</p>
         <button onClick={() => setToggleAdd(!toggleAdd)}>Add Category</button>
         <button onClick={() => setToggleRemove(!toggleRemove)}>
           Remove Category

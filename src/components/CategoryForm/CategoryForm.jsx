@@ -8,6 +8,7 @@ function CategoryForm({ setToggleAdd }) {
   function saveHandler() {
     dispatch({ type: "ADD_CATEGORY", payload: inputAdd });
     setInputAdd("");
+    setToggleAdd(false);
   }
 
   return (
