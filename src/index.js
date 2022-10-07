@@ -73,12 +73,9 @@ function favoritesReducer(state = [], action) {
   return state;
 }
 
-function categoryReducer(
-  state = { allCategories: [], selectedCategories: [] },
-  action
-) {
+function categoryReducer(state = [], action) {
   if (action.type === "SET_CATEGORIES") {
-    return { ...state, all: action.payload };
+    return action.payload;
   }
   return state;
 }

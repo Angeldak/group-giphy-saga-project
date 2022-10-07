@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../../FavListItem/FavListItem.css";
 
 function CategoryList({ setToggleCategories, item }) {
-  const categories = useSelector((store) => store.categories.all);
+  const categoriesList = useSelector((store) => store.categories);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const dispatch = useDispatch();
 
@@ -17,7 +17,7 @@ function CategoryList({ setToggleCategories, item }) {
 
   return (
     <div>
-      {categories.map((item) => (
+      {categoriesList.map((item) => (
         <li key={item.id} className="category-li">
           <input
             value={item.id}
