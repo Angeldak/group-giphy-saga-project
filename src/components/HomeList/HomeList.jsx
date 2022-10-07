@@ -15,7 +15,7 @@ function HomeList() {
             {'data' in searchResults && searchResults.data.map((gif, index) => {
                     return(
                     <div  key={index}>
-                    <img src={gif.images.original.url} />
+                    <img src={gif.images.fixed_height.url} />
                     <h4>{gif.title}</h4>
                     <button onClick={markFavorite}>Favorite</button>
                     </div>
