@@ -15,6 +15,7 @@ function* rootSaga() {
   yield takeEvery("GET_CATEGORIES", getCategories);
   yield takeEvery("SAVE_CATEGORIES", saveCategories);
   yield takeEvery("SEARCH_GIF", searchGifSaga);
+  yield takeEvery("REMOVE_FAVORITE", removeFavorite);
 }
 
 function* getCategories(action) {
@@ -46,6 +47,15 @@ function* getFavorites(action) {
   }
 }
 
+function* removeFavorite(action) {
+  try {
+    yield axios.delete(`/api/favorite/${action.payload}`);
+    yield put({ type: "GET_FAVORITES" });
+  } catch (error) {
+    console.log("error caught in removeFavorite :>> ", error);
+  }
+}
+
 function* searchGifSaga(action) {
   try {
     console.log("This is action in searchGif: ", action);
@@ -63,7 +73,7 @@ function* searchGifSaga(action) {
 function gifReducer(state = [], action) {
   if (action.type === "SET_SEARCH_RESULTS") {
     return action.payload;
-  } else if (action.type === 'FETCH_RESULTS') {
+  } else if (action.type === "FETCH_RESULTS") {
     return state;
   }
   return state;

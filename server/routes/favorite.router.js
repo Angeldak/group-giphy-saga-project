@@ -38,8 +38,17 @@ router.put("/:favId", (req, res) => {
 });
 
 // delete a favorite
-router.delete("/", (req, res) => {
-  res.sendStatus(200);
+router.delete("/:favID", (req, res) => {
+  const queryText = `DELETE FROM "favorite" WHERE "id" = $1;`;
+
+  pool
+    .query(queryText, [req.params.favID])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log("error caught in DELETE :>> ", error);
+    });
 });
 
 module.exports = router;
