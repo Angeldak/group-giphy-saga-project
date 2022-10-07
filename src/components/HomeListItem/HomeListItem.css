@@ -1,0 +1,28 @@
+.resultGifDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 3px #252422;
+    width: fit-content;
+}
+
+button {
+    background-color: #ccc5b9;
+    border-radius: 7px;
+    box-shadow: 0 0 3px #252422;
+    border: none;
+    cursor: pointer;
+    border: 1px solid #252422;
+}
+
+button:hover {
+    box-shadow: 0 0 3px #f75c03;
+    scale: 110%;
+}
+
+input {
+    background-color: #fffcf2;
+    box-shadow: 0 0 3px #252422;
+    border: 1px solid #f75c03;
+}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import './SearchForm.css';
 
 
 function SearchForm() {
@@ -22,8 +23,10 @@ function SearchForm() {
   return (
     <div>
       <h2>Search for GIF</h2>
+      <div className="searchInputs">
       <input onChange={(e) => {handleInput(e)}} placeholder="Enter search..." value={search}></input>
       <button onClick={handleClick}>Search</button>
+      </div>
     </div>
   )
 }
