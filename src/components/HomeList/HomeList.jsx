@@ -14,10 +14,10 @@ function HomeList() {
     }, []);
 
     // const markFavorite = (url) => {
-    //     let urlCheck = favorites.some((item) => {
-    //         console.log('this is item: ', item.url, 'this is url: ', url);
-    //         return String(item.url) === String(url)
-    //     }
+        // let urlCheck = favorites.some((item) => {
+        //     console.log('this is item: ', item.url, 'this is url: ', url);
+        //     return String(item.url) === String(url)
+        // }
     //     )
     //     console.log('this is urlCheck: ', urlCheck);
     //     if (!urlCheck) {
@@ -36,7 +36,13 @@ function HomeList() {
             {/* <p>{JSON.stringify(searchResults.data)}</p> */}
             {'data' in searchResults && searchResults.data.map((gif, index) => {
                     // console.log('this is gif in list: ', gif);
-                     return <HomeListItem key={index} gif={gif} index={index} favorites={favorites} />
+                    let urlCheck = favorites.some((item) => {
+                        // console.log('this is item: ', item.url, 'this is url: ', url);
+                        return String(item.url) === String(gif.images.fixed_height.url)
+                    }) 
+                     return (
+                        <HomeListItem key={index} gif={gif} index={index} favorites={favorites} alreadyFavorite={!urlCheck}/>
+                            )
                     // return(
                     //     <div  key={index}>
                     //         <img src={gif.images.fixed_height.url} />
