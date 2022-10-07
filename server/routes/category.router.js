@@ -17,4 +17,17 @@ router.get("/", (req, res) => {
     });
 });
 
+router.delete("/:catID", (req, res) => {
+  const queryText = `DELETE FROM "category" WHERE "id" = $1`;
+
+  pool
+    .query(queryText, [req.params.catID])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log("error caught in DELETE :>> ", error);
+    });
+});
+
 module.exports = router;
