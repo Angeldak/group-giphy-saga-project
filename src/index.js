@@ -16,6 +16,7 @@ function* rootSaga() {
   yield takeEvery("SAVE_CATEGORIES", saveCategories);
   yield takeEvery("SEARCH_GIF", searchGifSaga);
   yield takeEvery("DELETE_CATEGORY", deleteCategory);
+  yield takeEvery("ADD_CATEGORY", addCategory);
 }
 
 function* getCategories(action) {
@@ -35,6 +36,15 @@ function* saveCategories(action) {
     yield put({ type: "GET_FAVORITES" });
   } catch (error) {
     console.log("error caught in saveCategories :>> ", error);
+  }
+}
+
+function* addCategory(action) {
+  try {
+    yield axios.post(`/api/category/`, { category: action.payload });
+    yield put({ type: "GET_CATEGORIES" });
+  } catch (error) {
+    console.log("error caught in addCategory :>> ", error);
   }
 }
 

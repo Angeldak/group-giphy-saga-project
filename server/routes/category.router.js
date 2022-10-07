@@ -30,4 +30,18 @@ router.delete("/:catID", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  const queryText = `INSERT INTO "category" ("name")
+VALUES ($1);`;
+
+  pool
+    .query(queryText, [req.body.category])
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log("error caught in POST category :>> ", error);
+    });
+});
+
 module.exports = router;

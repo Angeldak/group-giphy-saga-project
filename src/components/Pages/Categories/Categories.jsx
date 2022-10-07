@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import CategoryForm from "../../CategoryForm/CategoryForm";
 
 function Categories() {
   const dispatch = useDispatch();
   const categoriesList = useSelector((store) => store.categories);
-  const [toggleAdd, settToggleAdd] = useState(false);
+  const [toggleAdd, setToggleAdd] = useState(false);
   const [toggleRemove, setToggleRemove] = useState(false);
 
   useEffect(() => {
@@ -30,12 +31,12 @@ function Categories() {
         ))}
       </div>
       <div className="categories-buttons">
-        <button onClick={() => settToggleAdd(!toggleAdd)}>Add Category</button>
+        <button onClick={() => setToggleAdd(!toggleAdd)}>Add Category</button>
         <button onClick={() => setToggleRemove(!toggleRemove)}>
           Remove Category
         </button>
       </div>
-      <div>{toggleAdd && "addForm"}</div>
+      <div>{toggleAdd && <CategoryForm setToggleAdd={setToggleAdd} />}</div>
     </div>
   );
 }
