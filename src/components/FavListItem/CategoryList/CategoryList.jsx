@@ -30,6 +30,7 @@ function CategoryList({ setToggleCategories, item }) {
         </li>
       ))}
       <button onClick={() => clickHandler()}>Save</button>
+      <button onClick={() => setToggleCategories(false)}>Cancel</button>
     </div>
   );
 }
