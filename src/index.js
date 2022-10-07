@@ -12,30 +12,56 @@ const middleWareSaga = createSagaMiddleware();
 
 function* rootSaga() {
   yield takeEvery("GET_FAVORITES", getFavorites);
-  yield takeEvery('SEARCH_GIF', searchGifSaga);
+  yield takeEvery("GET_CATEGORIES", getCategories);
+  yield takeEvery("SAVE_CATEGORIES", saveCategories);
+  yield takeEvery("SEARCH_GIF", searchGifSaga);
+}
+
+function* getCategories(action) {
+  try {
+    const results = yield axios.get("/api/category");
+    yield put({ type: "SET_CATEGORIES", payload: results.data });
+  } catch (error) {
+    console.log("error caught in getCategories :>> ", error);
+  }
+}
+
+function* saveCategories(action) {
+  try {
+    yield axios.put(`/api/favorite/${action.payload.id}`, {
+      category_id: action.payload.category_id,
+    });
+    yield put({ type: "GET_FAVORITES" });
+  } catch (error) {
+    console.log("error caught in saveCategories :>> ", error);
+  }
 }
 
 function* getFavorites(action) {
-  const results = yield axios.get("/api/favorite");
-  yield put({ type: "SET_FAVORITES", payload: results.data });
+  try {
+    const results = yield axios.get("/api/favorite");
+    yield put({ type: "SET_FAVORITES", payload: results.data });
+  } catch (error) {
+    console.log("error caught in getFavorites :>> ", error);
+  }
 }
 
 function* searchGifSaga(action) {
   try {
-    console.log('This is action in searchGif: ', action);
+    console.log("This is action in searchGif: ", action);
     const response = yield axios.get(`/api/search/${action.payload}`);
     yield put({
-      type: 'SET_SEARCH_RESULTS',
-      payload: response.data
-    })
-    console.log('this is response in set search results: ', response);
-  } catch(err) {
-  console.log('Error in catch: ', err); 
+      type: "SET_SEARCH_RESULTS",
+      payload: response.data,
+    });
+    console.log("this is response in set search results: ", response);
+  } catch (err) {
+    console.log("Error in catch: ", err);
   }
 }
 
 function gifReducer(state = [], action) {
-  if (action.type === 'SET_SEARCH_RESULTS') {
+  if (action.type === "SET_SEARCH_RESULTS") {
     return action.payload;
   }
   return state;
@@ -48,10 +74,18 @@ function favoritesReducer(state = [], action) {
   return state;
 }
 
+function categoryReducer(state = [], action) {
+  if (action.type === "SET_CATEGORIES") {
+    return action.payload;
+  }
+  return state;
+}
+
 const storeInstance = createStore(
   combineReducers({
     gifReducer,
     favorites: favoritesReducer,
+    categories: categoryReducer,
   }),
   applyMiddleware(logger, middleWareSaga)
 );
