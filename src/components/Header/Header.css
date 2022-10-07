@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+}
+
+.header {
+  background-color: #f75c03;
+  text-align: center;
+  height: 100px;
+  margin: 0;
+  padding-top: 60px;
+}
+
+.link-div {
+  background-color: #f75c03;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.link-name {
+  padding-left: 10px;
+  color: #252422;
+  text-decoration: none;
+  padding-right: 10px;
+}
+
+.link-name:hover {
+  color: #fffcf2;
+}
+
+.active {
+  font-weight: bold;
+  padding-left: 10px;
+  color: #252422;
+  text-decoration: none;
+  padding-right: 10px;
+  text-decoration: underline;
+}
+
+.active:hover {
+  color: #fffcf2;
+}
