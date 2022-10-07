@@ -1,14 +1,19 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import CategoryList from "./CategoryList/CategoryList";
 
 function FavListItem({ item }) {
+  const dispatch = useDispatch();
   const [toggleCategories, setToggleCategories] = useState(false);
   const categoriesList = useSelector((store) => store.categories);
   const currentCategory =
     categoriesList[
       categoriesList.findIndex((cats) => cats.id === item.category_id)
     ]?.name;
+
+  function removeFavorite(id) {
+    dispatch({ type: "REMOVE_FAVORITE", payload: id });
+  }
 
   return (
     <div className="card">
@@ -20,9 +25,14 @@ function FavListItem({ item }) {
         {toggleCategories ? (
           ""
         ) : (
-          <button onClick={() => setToggleCategories(!toggleCategories)}>
-            {"Categories"}
-          </button>
+          <>
+            <button onClick={() => setToggleCategories(!toggleCategories)}>
+              Categories
+            </button>
+            <button onClick={() => removeFavorite(item.id)}>
+              Remove Favorite
+            </button>
+          </>
         )}
         {toggleCategories && (
           <CategoryList setToggleCategories={setToggleCategories} item={item} />

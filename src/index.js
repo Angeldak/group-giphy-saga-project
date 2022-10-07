@@ -16,6 +16,7 @@ function* rootSaga() {
   yield takeEvery("GET_CATEGORIES", getCategories);
   yield takeEvery("SAVE_CATEGORIES", saveCategories);
   yield takeEvery("SEARCH_GIF", searchGifSaga);
+  yield takeEvery("REMOVE_FAVORITE", removeFavorite);
   yield takeEvery("DELETE_CATEGORY", deleteCategory);
   yield takeEvery("ADD_CATEGORY", addCategory);
 }
@@ -58,6 +59,16 @@ function* getFavorites(action) {
   }
 }
 
+
+function* removeFavorite(action) {
+  try {
+    yield axios.delete(`/api/favorite/${action.payload}`);
+    yield put({ type: "GET_FAVORITES" });
+  } catch (error) {
+    console.log("error caught in removeFavorite :>> ", error);
+  }
+ }
+ 
 function* addFavorite(action) {
   // console.log('This is action.payload: ', action.payload);
   try {
