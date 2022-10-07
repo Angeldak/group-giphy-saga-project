@@ -12,6 +12,7 @@
   padding: 15px;
   border-radius: 10px;
   min-width: 33vw;
+  align-self: flex-start;
 }
 
 .gif-p {
