@@ -5,16 +5,16 @@ import CategoryList from "./CategoryList/CategoryList";
 function FavListItem({ item }) {
   const [toggleCategories, setToggleCategories] = useState(false);
   const categoriesList = useSelector((store) => store.categories);
+  const currentCategory =
+    categoriesList[
+      categoriesList.findIndex((cats) => cats.id === item.category_id)
+    ]?.name;
 
   return (
     <div className="card">
       <div className="gif">
         <img src={item.url} />
-        <p>{`Category: ${
-          categoriesList[
-            categoriesList.findIndex((cats) => cats.id === item.category_id)
-          ].name
-        }`}</p>
+        <p>{`Category: ${currentCategory}`}</p>
       </div>
       <div className="button">
         {toggleCategories ? (

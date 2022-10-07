@@ -31,6 +31,7 @@ function* saveCategories(action) {
     yield axios.put(`/api/favorite/${action.payload.id}`, {
       category_id: action.payload.category_id,
     });
+    yield put({ type: "GET_FAVORITES" });
   } catch (error) {
     console.log("error caught in saveCategories :>> ", error);
   }
