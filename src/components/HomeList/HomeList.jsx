@@ -41,7 +41,7 @@ function HomeList() {
                         return String(item.url) === String(gif.images.fixed_height.url)
                     }) 
                      return (
-                        <HomeListItem key={index} gif={gif} index={index} favorites={favorites} alreadyFavorite={!urlCheck}/>
+                        <HomeListItem key={index} gif={gif} index={index} favorites={favorites} alreadyFavorite={urlCheck}/>
                             )
                     // return(
                     //     <div  key={index}>
