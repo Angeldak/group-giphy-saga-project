@@ -19,7 +19,7 @@ function FavListItem({ item }) {
     <div className="card">
       <div className="gif">
         <img src={item.url} />
-        <p>{`Category: ${currentCategory}`}</p>
+        <p className="gif-p">{`Category: ${currentCategory}`}</p>
       </div>
       <div className="button">
         {toggleCategories ? (

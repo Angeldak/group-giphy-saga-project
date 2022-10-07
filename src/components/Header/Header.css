@@ -18,23 +18,24 @@ body {
 
 .link-name {
   padding-left: 10px;
-  color: black;
+  color: #252422;
   text-decoration: none;
   padding-right: 10px;
 }
 
 .link-name:hover {
-  color: white;
+  color: #fffcf2;
 }
 
 .active {
   font-weight: bold;
   padding-left: 10px;
-  color: black;
+  color: #252422;
   text-decoration: none;
   padding-right: 10px;
+  text-decoration: underline;
 }
 
 .active:hover {
-  color: white;
+  color: #fffcf2;
 }
