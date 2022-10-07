@@ -12,10 +12,13 @@ const middleWareSaga = createSagaMiddleware();
 
 function* rootSaga() {
   yield takeEvery("GET_FAVORITES", getFavorites);
+  yield takeEvery('ADD_FAVORITE', addFavorite)
   yield takeEvery("GET_CATEGORIES", getCategories);
   yield takeEvery("SAVE_CATEGORIES", saveCategories);
   yield takeEvery("SEARCH_GIF", searchGifSaga);
   yield takeEvery("REMOVE_FAVORITE", removeFavorite);
+  yield takeEvery("DELETE_CATEGORY", deleteCategory);
+  yield takeEvery("ADD_CATEGORY", addCategory);
 }
 
 function* getCategories(action) {
@@ -38,6 +41,15 @@ function* saveCategories(action) {
   }
 }
 
+function* addCategory(action) {
+  try {
+    yield axios.post(`/api/category/`, { category: action.payload });
+    yield put({ type: "GET_CATEGORIES" });
+  } catch (error) {
+    console.log("error caught in addCategory :>> ", error);
+  }
+}
+
 function* getFavorites(action) {
   try {
     const results = yield axios.get("/api/favorite");
@@ -47,12 +59,25 @@ function* getFavorites(action) {
   }
 }
 
+
 function* removeFavorite(action) {
   try {
     yield axios.delete(`/api/favorite/${action.payload}`);
     yield put({ type: "GET_FAVORITES" });
   } catch (error) {
     console.log("error caught in removeFavorite :>> ", error);
+  }
+ }
+ 
+function* addFavorite(action) {
+  // console.log('This is action.payload: ', action.payload);
+  try {
+    yield axios.post('/api/favorite', {url: action.payload});
+    yield put({
+      type: 'GET_FAVORITES'
+    })
+  } catch (err) {
+    console.log('Error in adding favorite saga: ', err);
   }
 }
 
@@ -67,6 +92,15 @@ function* searchGifSaga(action) {
     console.log("this is response in set search results: ", response);
   } catch (err) {
     console.log("Error in catch: ", err);
+  }
+}
+
+function* deleteCategory(action) {
+  try {
+    yield axios.delete(`/api/category/${action.payload}`);
+    yield put({ type: "GET_CATEGORIES" });
+  } catch (error) {
+    console.log("error caught in deleteCategory :>> ", error);
   }
 }
 

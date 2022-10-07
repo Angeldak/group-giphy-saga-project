@@ -3,8 +3,7 @@ import Header from "../Header/Header";
 import Home from "../Pages/Home/Home";
 import Favorites from "../Pages/Favorites/Favorites";
 import { HashRouter as Router, Route, Link } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import Categories from "../Pages/Categories/Categories";
 
 function App(props) {
   return (
@@ -16,6 +15,9 @@ function App(props) {
         </Route>
         <Route path="/favorites">
           <Favorites />
+        </Route>
+        <Route path="/categories">
+          <Categories />
         </Route>
       </Router>
     </div>
