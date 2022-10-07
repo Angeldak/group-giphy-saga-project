@@ -37,6 +37,8 @@ function* searchGifSaga(action) {
 function gifReducer(state = [], action) {
   if (action.type === 'SET_SEARCH_RESULTS') {
     return action.payload;
+  } else if (action.type === 'FETCH_RESULTS') {
+    return state;
   }
   return state;
 }
