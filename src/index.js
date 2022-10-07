@@ -16,6 +16,8 @@ function* rootSaga() {
   yield takeEvery("GET_CATEGORIES", getCategories);
   yield takeEvery("SAVE_CATEGORIES", saveCategories);
   yield takeEvery("SEARCH_GIF", searchGifSaga);
+  yield takeEvery("DELETE_CATEGORY", deleteCategory);
+  yield takeEvery("ADD_CATEGORY", addCategory);
 }
 
 function* getCategories(action) {
@@ -35,6 +37,15 @@ function* saveCategories(action) {
     yield put({ type: "GET_FAVORITES" });
   } catch (error) {
     console.log("error caught in saveCategories :>> ", error);
+  }
+}
+
+function* addCategory(action) {
+  try {
+    yield axios.post(`/api/category/`, { category: action.payload });
+    yield put({ type: "GET_CATEGORIES" });
+  } catch (error) {
+    console.log("error caught in addCategory :>> ", error);
   }
 }
 
@@ -73,10 +84,19 @@ function* searchGifSaga(action) {
   }
 }
 
+function* deleteCategory(action) {
+  try {
+    yield axios.delete(`/api/category/${action.payload}`);
+    yield put({ type: "GET_CATEGORIES" });
+  } catch (error) {
+    console.log("error caught in deleteCategory :>> ", error);
+  }
+}
+
 function gifReducer(state = [], action) {
   if (action.type === "SET_SEARCH_RESULTS") {
     return action.payload;
-  } else if (action.type === 'FETCH_RESULTS') {
+  } else if (action.type === "FETCH_RESULTS") {
     return state;
   }
   return state;
