@@ -12,7 +12,7 @@ function CategoryForm({ setToggleAdd }) {
   }
 
   return (
-    <div>
+    <div className="cat-form">
       <input
         value={inputAdd}
         onChange={(event) => setInputAdd(event.target.value)}

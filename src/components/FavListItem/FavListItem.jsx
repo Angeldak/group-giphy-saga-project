@@ -27,7 +27,7 @@ function FavListItem({ item }) {
         ) : (
           <>
             <button onClick={() => setToggleCategories(!toggleCategories)}>
-              Categories
+              Edit
             </button>
             <button onClick={() => removeFavorite(item.id)}>Un-Favorite</button>
           </>

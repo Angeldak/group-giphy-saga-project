@@ -1,0 +1,45 @@
+.cat-header {
+  width: 100vw;
+  text-align: center;
+}
+
+.categories-list {
+  width: 100vw;
+  list-style: none;
+  text-align: left;
+  margin-left: 35%;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.categories-list li {
+  margin-top: 10px;
+  line-height: 25px;
+}
+
+.categories-list button {
+  margin-left: 10px;
+  background-color: white;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.categories-buttons {
+  text-align: center;
+  width: 100vw;
+}
+
+.categories-buttons button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.cat-form {
+  margin-top: 20px;
+}
+
+.cat-form button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
