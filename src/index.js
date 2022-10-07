@@ -12,6 +12,7 @@ const middleWareSaga = createSagaMiddleware();
 
 function* rootSaga() {
   yield takeEvery("GET_FAVORITES", getFavorites);
+  yield takeEvery('ADD_FAVORITE', addFavorite)
   yield takeEvery("GET_CATEGORIES", getCategories);
   yield takeEvery("SAVE_CATEGORIES", saveCategories);
   yield takeEvery("SEARCH_GIF", searchGifSaga);
@@ -43,6 +44,18 @@ function* getFavorites(action) {
     yield put({ type: "SET_FAVORITES", payload: results.data });
   } catch (error) {
     console.log("error caught in getFavorites :>> ", error);
+  }
+}
+
+function* addFavorite(action) {
+  // console.log('This is action.payload: ', action.payload);
+  try {
+    yield axios.post('/api/favorite', {url: action.payload});
+    yield put({
+      type: 'GET_FAVORITES'
+    })
+  } catch (err) {
+    console.log('Error in adding favorite saga: ', err);
   }
 }
 
