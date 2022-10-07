@@ -13,6 +13,7 @@ const middleWareSaga = createSagaMiddleware();
 function* rootSaga() {
   yield takeEvery("GET_FAVORITES", getFavorites);
   yield takeEvery("GET_CATEGORIES", getCategories);
+  yield takeEvery("SAVE_CATEGORIES", saveCategories);
   yield takeEvery("SEARCH_GIF", searchGifSaga);
 }
 
@@ -21,7 +22,17 @@ function* getCategories(action) {
     const results = yield axios.get("/api/category");
     yield put({ type: "SET_CATEGORIES", payload: results.data });
   } catch (error) {
-    console.log("error caught in error :>> ", error);
+    console.log("error caught in getCategories :>> ", error);
+  }
+}
+
+function* saveCategories(action) {
+  try {
+    yield axios.put(`/api/favorite/${action.payload.id}`, {
+      category_id: action.payload.category_id,
+    });
+  } catch (error) {
+    console.log("error caught in saveCategories :>> ", error);
   }
 }
 
@@ -30,7 +41,7 @@ function* getFavorites(action) {
     const results = yield axios.get("/api/favorite");
     yield put({ type: "SET_FAVORITES", payload: results.data });
   } catch (error) {
-    console.log("error caught in error :>> ", error);
+    console.log("error caught in getFavorites :>> ", error);
   }
 }
 
@@ -62,9 +73,12 @@ function favoritesReducer(state = [], action) {
   return state;
 }
 
-function categoryReducer(state = [], action) {
+function categoryReducer(
+  state = { allCategories: [], selectedCategories: [] },
+  action
+) {
   if (action.type === "SET_CATEGORIES") {
-    return action.payload;
+    return { ...state, all: action.payload };
   }
   return state;
 }
