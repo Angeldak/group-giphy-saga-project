@@ -15,8 +15,10 @@ function HomeListItem(props) {
     return(
         <div  key={props.index} className="resultGifDiv">
             <img src={props.gif.images.fixed_height.url} />
-            {props.alreadyFavorite?<p>Already Favorited 💚</p>:<button onClick={() => markFavorite(props.gif.images.fixed_height.url)}>Add to Favorites 💚</button>}
-            <h4>{props.gif.title}</h4>
+            <div>
+                {props.alreadyFavorite?<p className="searchGifButtons">💚</p>:<button className="favButton" onClick={() => markFavorite(props.gif.images.fixed_height.url)}>Add to Favorites 💚</button>}
+                <h4 className="searchGifButtons">{props.gif.title}</h4>
+            </div>
         </div>
     )
 }

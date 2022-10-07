@@ -21,7 +21,7 @@ function SearchForm() {
   }
 
   return (
-    <div>
+    <div className="searchFormDiv">
       <h2>Search for GIF</h2>
       <div className="searchInputs">
       <input onChange={(e) => {handleInput(e)}} placeholder="Enter search..." value={search}></input>

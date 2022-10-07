@@ -1,4 +1,12 @@
 .searchInputs {
     display: flex;
+    align-items: flex-end;
+    /* float: right; */
+}
+
+.searchFormDiv {
+    display: flex;
     align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
